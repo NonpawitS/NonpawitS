@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(py scripts/bq_load_tk_status.py --apply)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~/*)",
+      "Bash(rm -rf $HOME*)",
+      "Bash(rm -fr *)",
+      "Bash(git push --force*)",
+      "Bash(git push -f *)",
+      "Bash(git reset --hard origin*)",
+      "Bash(git clean -fd*)",
+      "Bash(dd if=*)",
+      "Bash(mkfs*)",
+      "Bash(chmod 777 *)",
+      "Bash(chmod -R 777 *)",
+      "PowerShell(Remove-Item -Recurse -Force C:*)",
+      "PowerShell(Remove-Item -Recurse -Force D:*)",
+      "PowerShell(Format-Volume*)",
+      "PowerShell(Stop-Computer*)",
+      "PowerShell(Restart-Computer*)",
+      "PowerShell(Set-ExecutionPolicy Unrestricted*)",
+      "PowerShell(Set-ExecutionPolicy Bypass*)",
+      "PowerShell(New-LocalUser*)",
+      "PowerShell(Add-LocalGroupMember*)"
+    ],
+    "ask": [
+      "Bash(curl http*)",
+      "Bash(curl https*)",
+      "Bash(wget *)",
+      "Bash(ssh *)",
+      "Bash(scp *)",
+      "Bash(rsync *)",
+      "Bash(git push*)",
+      "Bash(git pull*)",
+      "Bash(npm publish*)",
+      "Bash(pip install*)",
+      "Bash(npm install*)",
+      "PowerShell(Invoke-WebRequest *)",
+      "PowerShell(Invoke-RestMethod *)",
+      "PowerShell(New-NetFirewallRule *)",
+      "PowerShell(Set-NetFirewallRule *)",
+      "PowerShell(Set-MpPreference *)",
+      "Write(C:/Windows/**)",
+      "Write(C:/Program Files/**)",
+      "Write(D:/Users/sanonpawit/.claude/settings*)",
+      "Write(D:/Users/sanonpawit/.ssh/**)",
+      "Write(**/.env)",
+      "Write(**/credentials*)",
+      "Write(**/*secret*)",
+      "Edit(D:/Users/sanonpawit/.claude/settings*)",
+      "Edit(D:/Users/sanonpawit/.ssh/**)",
+      "Edit(**/.env)",
+      "Edit(**/credentials*)"
+    ],
+    "disableBypassPermissionsMode": "disable",
+    "disableAutoMode": "disable"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "{ date '+[%Y-%m-%d %H:%M:%S]'; cat; echo; } >> /d/Users/sanonpawit/.claude/audit-log.txt 2>/dev/null"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"systemMessage\":\"🛡️ Security policy active: RC disabled, bypass mode locked, audit log ON. Sensitive ops (network/credentials/system paths) require confirmation.\"}'"
+          }
+        ]
+      }
+    ]
+  },
+  "disableRemoteControl": true,
+  "enabledPlugins": {
+    "cockroachdb@claude-plugins-official": false
+  },
+  "effortLevel": "high",
+  "isolatePeerMachines": true,
+  "disableBackgroundAgents": true
+}

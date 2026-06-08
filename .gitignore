@@ -1,0 +1,39 @@
+# Auth & secrets — ห้าม push เด็ดขาด
+.credentials.json
+settings.local.json
+
+# Runtime / cache / temp
+cache/
+backups/
+debug/
+downloads/
+file-history/
+paste-cache/
+shell-snapshots/
+telemetry/
+session-env/
+ide/
+plugins/
+
+# Conversation history (ใหญ่ + sensitive)
+sessions/
+history.jsonl
+audit-log.txt
+
+# Project conversation data (เก็บเฉพาะ memory subfolder)
+projects/*/
+!projects/D--Users-sanonpawit/
+projects/D--Users-sanonpawit/*/
+!projects/D--Users-sanonpawit/memory/
+
+# Cache files
+*.jsonl
+stats-cache.json
+mcp-needs-auth-cache.json
+.last-cleanup
+.last-update-result.json
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
