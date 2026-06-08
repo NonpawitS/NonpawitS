@@ -77,7 +77,10 @@ Before executing actions that may affect systems, data, or external parties:
 - Avoid irreversible actions unless confirmed
 - Never perform destructive operations (rm, delete, overwrite) without explicit user confirmation
 
-Output ทุกชิ้นให้บันทึกใน `/output/` เท่านั้น  
+สำหรับ Output:
+- ถ้ากำหนด Working Directory หรือ Project Root ไว้ → ให้สร้างหรือหา folder ที่เกี่ยวข้องใน path นั้น (เช่น `output/`, `results/`, `exports/`) แล้ว output ในนั้น
+- ถ้าไม่ได้กำหนด root → ใช้ `D:\Users\sanonpawit\output\` เป็น fallback
+
 ห้ามแก้ไข Source File ต้นฉบับโดยตรง
 
 ---
@@ -166,5 +169,5 @@ If a conflict exists → follow this policy.
 - **Timezone:** `Asia/Bangkok` (UTC+7) — ทุก datetime ต้อง timezone-aware
 - **ตัวเลข:** format `#,##0.##` มี comma คั่น
 - **CSV encoding:** `utf-8-sig` | WDCS: `cp874`
-- **Output:** บันทึกใน `D:\Users\sanonpawit\output\` เท่านั้น
+- **Output:** ถ้ามี project root → หา/สร้าง folder ที่เกี่ยวข้องใน path นั้น; ถ้าไม่มี → ใช้ `D:\Users\sanonpawit\output\`
 - **Python:** ใช้ `py` หรือ `python3` เท่านั้น (ไม่ใช้ `python`)
