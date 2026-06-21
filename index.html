@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nonpawit Saisuwan — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;500;600&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #0A0B0D;
+  --bg-2: #0E1014;
+  --surface: #14171C;
+  --surface-2: #181C22;
+  --border: #21262E;
+  --border-hi: #2E353F;
+  --text: #ECEEF1;
+  --muted: #8A929E;
+  --faint: #5A626D;
+  --red: #FF2D46;
+  --red-deep: #C8102E;
+  --live: #36E07F;
+  --cyan: #4DE0E0;
+  --display: 'Space Grotesk', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --body: 'Sora', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============= BACKGROUND LAYERS ============= */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.25;
+  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 80%);
+  pointer-events: none;
+}
+.bg-glow {
+  position: fixed;
+  top: -30vh; left: 50%;
+  transform: translateX(-50%);
+  width: 80vw; height: 80vh;
+  background: radial-gradient(circle, rgba(255,45,70,0.10) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+main { position: relative; z-index: 1; }
+
+/* ============= NAV ============= */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  backdrop-filter: blur(12px);
+  background: rgba(10,11,13,0.55);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+nav.scrolled { border-bottom-color: var(--border); background: rgba(10,11,13,0.85); }
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text);
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-logo .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 8px var(--live);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--red); }
+@media (max-width: 720px){ .nav-links { display: none; } }
+.nav-right { display: flex; align-items: center; gap: 22px; }
+.lang-toggle {
+  font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  color: var(--text); background: transparent; border: 1px solid var(--border-hi);
+  border-radius: 6px; padding: 7px 12px; cursor: pointer; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.lang-toggle:hover { border-color: var(--red); color: var(--red); }
+.lang-toggle .globe { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); }
+
+/* ============= LAYOUT ============= */
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+section { padding: 100px 0; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 28px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px; height: 1px; background: var(--red);
+}
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 1.05;
+  margin-bottom: 18px;
+}
+
+/* ============= HERO ============= */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr;
+  align-items: center;
+  gap: 56px;
+  padding-top: 120px;
+}
+@media (max-width: 900px){
+  .hero { grid-template-columns: 1fr; gap: 36px; min-height: auto; padding-top: 130px; padding-bottom: 60px; }
+}
+.hero-status {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: var(--live);
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 7px 14px;
+  border: 1px solid rgba(54,224,127,0.3);
+  border-radius: 100px;
+  background: rgba(54,224,127,0.06);
+  margin-bottom: 30px;
+}
+.hero-status .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); box-shadow: 0 0 8px var(--live); animation: pulse 2s infinite; }
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 700;
+  letter-spacing: -3px;
+  line-height: 0.95;
+  margin-bottom: 24px;
+}
+.hero h1 .accent { color: var(--red); }
+.hero-sub {
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--muted);
+  font-weight: 300;
+  max-width: 520px;
+  margin-bottom: 22px;
+  line-height: 1.55;
+}
+.hero-roles {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--faint);
+  letter-spacing: 0.5px;
+  margin-bottom: 38px;
+}
+.hero-roles span { color: var(--cyan); }
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 24px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 9px;
+  cursor: pointer;
+  border: 1px solid var(--border-hi);
+}
+.btn-primary { background: var(--red); color: #fff; border-color: var(--red); }
+.btn-primary:hover { background: var(--red-deep); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,45,70,0.3); }
+.btn-ghost { background: transparent; color: var(--text); }
+.btn-ghost:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
+
+/* Hero terminal panel */
+.terminal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+.terminal-bar {
+  display: flex; align-items: center; gap: 7px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.terminal-bar .tb { width: 11px; height: 11px; border-radius: 50%; }
+.tb.r { background: #FF5F57; } .tb.y { background: #FEBC2E; } .tb.g { background: #28C840; }
+.terminal-bar .tb-title { font-family: var(--mono); font-size: 11px; color: var(--faint); margin-left: 10px; letter-spacing: 0.5px; }
+.terminal-body { padding: 22px; font-family: var(--mono); font-size: 12.5px; line-height: 2; }
+.t-line { color: var(--muted); }
+.t-line .k { color: var(--cyan); }
+.t-line .v { color: var(--text); }
+.t-line .c { color: var(--faint); }
+.t-line .ok { color: var(--live); }
+.t-prompt { color: var(--red); }
+.t-photo {
+  width: 100%; aspect-ratio: 1/1; max-width: 130px;
+  border-radius: 8px; overflow: hidden; border: 1px solid var(--border-hi);
+  margin-bottom: 18px; filter: grayscale(0.25) contrast(1.05);
+}
+.t-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transform: scale(1.7) translateY(9%); transform-origin: center 18%; }
+
+/* ============= STATS ============= */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+@media (max-width: 760px){ .stats { grid-template-columns: repeat(2,1fr); } }
+.stat { background: var(--bg-2); padding: 34px 26px; }
+.stat-num {
+  font-family: var(--display);
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 700;
+  letter-spacing: -2px;
+  color: var(--text);
+  line-height: 1;
+}
+.stat-num .u { color: var(--red); }
+.stat-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+/* ============= ABOUT ============= */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+@media (max-width: 820px){ .about-grid { grid-template-columns: 1fr; gap: 30px; } }
+.about-lead {
+  font-family: var(--display);
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.5px;
+}
+.about-lead .hl { color: var(--red); }
+.about-body { color: var(--muted); font-size: 16px; line-height: 1.75; }
+.about-body p + p { margin-top: 18px; }
+.about-body strong { color: var(--text); font-weight: 500; }
+
+/* ============= BUILD / CASE STUDIES ============= */
+.build-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 820px){ .build-grid { grid-template-columns: 1fr; } }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.card::after {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--red);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s;
+}
+.card:hover { border-color: var(--border-hi); transform: translateY(-4px); background: var(--surface-2); }
+.card:hover::after { transform: scaleX(1); }
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 12px; }
+.card-id { font-family: var(--mono); font-size: 12px; color: var(--faint); letter-spacing: 1px; }
+.card-tag {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  color: var(--cyan); border: 1px solid rgba(77,224,224,0.3);
+  padding: 4px 9px; border-radius: 4px; white-space: nowrap;
+}
+.card-tag.dev { color: var(--live); border-color: rgba(54,224,127,0.3); }
+.card h3 { font-family: var(--display); font-size: 21px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 12px; }
+.card p { color: var(--muted); font-size: 14.5px; line-height: 1.65; }
+.card-stack { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+.card-stack span { font-family: var(--mono); font-size: 10.5px; color: var(--faint); border: 1px solid var(--border); padding: 3px 8px; border-radius: 4px; }
+
+/* ============= STACK ============= */
+.stack-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+@media (max-width: 720px){ .stack-grid { grid-template-columns: 1fr; } }
+.stack-row { background: var(--bg-2); padding: 24px 28px; display: grid; grid-template-columns: 150px 1fr; gap: 20px; align-items: baseline; }
+@media (max-width: 500px){ .stack-row { grid-template-columns: 1fr; gap: 8px; } }
+.stack-cat { font-family: var(--mono); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--red); }
+.stack-items { color: var(--text); font-size: 15px; font-weight: 300; line-height: 1.7; }
+
+/* ============= EXPERIENCE ============= */
+.timeline { border-left: 1px solid var(--border); padding-left: 0; }
+.tl-item { position: relative; padding: 0 0 44px 40px; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before {
+  content: ""; position: absolute; left: -5px; top: 6px;
+  width: 9px; height: 9px; border-radius: 50%; background: var(--red);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+.tl-period { font-family: var(--mono); font-size: 12px; color: var(--faint); letter-spacing: 1px; margin-bottom: 6px; }
+.tl-role { font-family: var(--display); font-size: 22px; font-weight: 600; letter-spacing: -0.5px; }
+.tl-org { color: var(--red); font-size: 14px; font-family: var(--mono); margin: 4px 0 12px; }
+.tl-desc { color: var(--muted); font-size: 15px; line-height: 1.7; max-width: 640px; }
+
+/* ============= VISION ============= */
+.vision { position: relative; }
+.vision-card {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--bg-2) 100%);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 60px;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 720px){ .vision-card { padding: 36px 26px; } }
+.vision-card::before {
+  content: "";
+  position: absolute; top: -50%; right: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,45,70,0.12) 0%, transparent 70%);
+}
+.vision-flag { font-family: var(--mono); font-size: 12px; letter-spacing: 2px; color: var(--red); margin-bottom: 24px; }
+.vision-quote {
+  font-family: var(--display);
+  font-size: clamp(26px, 4vw, 44px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -1px;
+  position: relative;
+  max-width: 900px;
+}
+.vision-quote .hl { color: var(--red); }
+.vision-body { color: var(--muted); font-size: 16px; line-height: 1.75; margin-top: 28px; max-width: 680px; }
+
+/* ============= CERTS ============= */
+.cert-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+@media (max-width: 760px){ .cert-row { grid-template-columns: 1fr; } }
+.cert {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 26px; position: relative;
+  transition: all 0.25s;
+}
+.cert:hover { border-color: var(--border-hi); transform: translateY(-3px); }
+.cert-year { font-family: var(--mono); font-size: 13px; color: var(--red); letter-spacing: 1px; margin-bottom: 14px; }
+.cert h4 { font-family: var(--display); font-size: 17px; font-weight: 600; line-height: 1.3; margin-bottom: 8px; }
+.cert p { font-family: var(--mono); font-size: 11.5px; color: var(--faint); letter-spacing: 0.5px; }
+.cert-arc {
+  font-family: var(--mono); font-size: 12px; color: var(--muted);
+  letter-spacing: 1px; text-align: center; margin-top: 30px;
+}
+.cert-arc span { color: var(--cyan); }
+
+/* ============= CONTACT ============= */
+.contact { text-align: center; padding-bottom: 60px; }
+.contact h2 {
+  font-family: var(--display);
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 700; letter-spacing: -2px; line-height: 1;
+  margin-bottom: 28px;
+}
+.contact h2 .accent { color: var(--red); }
+.contact-sub { color: var(--muted); font-size: 17px; max-width: 480px; margin: 0 auto 40px; }
+.contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.contact-mail { font-family: var(--mono); font-size: clamp(14px,2.5vw,20px); color: var(--cyan); text-decoration: none; letter-spacing: 0.5px; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+.contact-mail:hover { border-bottom-color: var(--cyan); }
+footer {
+  border-top: 1px solid var(--border);
+  padding: 30px 32px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--mono); font-size: 11px; color: var(--faint); letter-spacing: 0.5px;
+  flex-wrap: wrap; gap: 12px;
+}
+
+/* ============= WAMOER ============= */
+.wamoer-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 44px; }
+@media (max-width: 820px){ .wamoer-intro { grid-template-columns: 1fr; gap: 24px; } }
+.wamoer-flow {
+  font-family: var(--mono); font-size: 13px; line-height: 2.1; color: var(--faint);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px;
+}
+.wamoer-flow .bad { color: var(--faint); }
+.wamoer-flow .good { color: var(--text); }
+.wamoer-flow .good b { color: var(--red); font-weight: 700; }
+.wamoer-flow .arrow { color: var(--border-hi); }
+.wamoer-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+@media (max-width: 820px){ .wamoer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px){ .wamoer-grid { grid-template-columns: 1fr; } }
+.wphase {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 24px 22px; position: relative; transition: all 0.3s; overflow: hidden;
+}
+.wphase:hover { border-color: var(--border-hi); transform: translateY(-4px); background: var(--surface-2); }
+.wphase::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--red); transform: scaleY(0); transform-origin: top; transition: transform 0.35s;
+}
+.wphase:hover::before { transform: scaleY(1); }
+.wphase-letter {
+  font-family: var(--display); font-size: 40px; font-weight: 700; letter-spacing: -2px;
+  color: var(--red); line-height: 1; margin-bottom: 4px;
+}
+.wphase-name { font-family: var(--mono); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
+.wphase-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.wamoer-foot {
+  font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.5px;
+  margin-top: 30px; padding: 18px 22px; border-left: 2px solid var(--red); background: var(--surface);
+  border-radius: 0 8px 8px 0;
+}
+.wamoer-foot b { color: var(--text); font-weight: 600; }
+
+html[lang="th"] body,
+html[lang="th"] .section-title,
+html[lang="th"] .about-lead,
+html[lang="th"] .vision-quote,
+html[lang="th"] .contact h2,
+html[lang="th"] .hero-sub,
+html[lang="th"] .tl-role,
+html[lang="th"] .wphase-desc,
+html[lang="th"] .card p,
+html[lang="th"] .about-body,
+html[lang="th"] .vision-body { font-family: 'Noto Sans Thai', 'Sora', sans-serif; }
+html[lang="th"] .hero h1 { font-family: 'Space Grotesk', 'Noto Sans Thai', sans-serif; }
+
+/* ============= REVEAL ANIMATION ============= */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce){ .reveal { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+
+<nav id="nav">
+  <div class="nav-logo"><span class="dot"></span>NS_//DATA</div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#build" data-i18n="nav_built">Built</a>
+      <a href="#wamoer">WAMOER</a>
+      <a href="#stack" data-i18n="nav_stack">Stack</a>
+      <a href="#experience" data-i18n="nav_exp">Experience</a>
+      <a href="#vision" data-i18n="nav_vision">Vision</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+    </div>
+    <button class="lang-toggle" id="langToggle" aria-label="Switch language"><span class="globe"></span>ไทย</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero wrap">
+    <div>
+      <div class="hero-status" data-i18n="hero_status"><span class="dot"></span>OPEN TO THE RIGHT OPPORTUNITY</div>
+      <h1>Nonpawit<br/>Saisuwan<span class="accent">.</span></h1>
+      <p class="hero-sub" data-i18n="hero_sub">Data &amp; operations analyst turning warehouse and e-commerce complexity into pipelines, dashboards, and tools that ship.</p>
+      <p class="hero-roles" data-i18n="hero_roles">// <span>12+ yrs</span> operations &amp; analytics · BigQuery · Python · Power BI · vibe coding</p>
+      <div class="hero-cta">
+        <a href="Resume - Nonpawit Saisuwan v2.html" class="btn btn-primary" target="_blank" data-i18n="btn_resume">↓ Download Resume</a>
+        <a href="#build" class="btn btn-ghost" data-i18n="btn_work">View Work</a>
+      </div>
+    </div>
+    <div class="terminal reveal">
+      <div class="terminal-bar">
+        <span class="tb r"></span><span class="tb y"></span><span class="tb g"></span>
+        <span class="tb-title">~/profile/nonpawit.json</span>
+      </div>
+      <div class="terminal-body">
+        <div class="t-photo"><img src="headshot-ns-white.png" alt="Nonpawit Saisuwan" /></div>
+        <div class="t-line"><span class="c">// current</span></div>
+        <div class="t-line"><span class="k">role</span>: <span class="v">"Dept Manager, Order Mgmt"</span></div>
+        <div class="t-line"><span class="k">org</span>: <span class="v">"CMG Online · Central Group"</span></div>
+        <div class="t-line"><span class="k">domain</span>: <span class="v">"e-commerce fulfillment"</span></div>
+        <div class="t-line"><span class="k">platforms</span>: <span class="v">[Shopee, Lazada, TikTok]</span></div>
+        <div class="t-line"><span class="k">status</span>: <span class="ok">"open_to_conversations"</span></div>
+        <div class="t-line"><span class="t-prompt">›</span> <span class="c">scroll to load record_</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= STATS ================= -->
+  <section class="wrap" style="padding-top:0;">
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="stat-num" data-target="12" data-suffix="+">0</div>
+        <div class="stat-label" data-i18n="stat_years">Years Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="6" data-suffix="+">6+</div>
+        <div class="stat-label" data-i18n="stat_projects">Production Projects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="5" data-suffix="+">0</div>
+        <div class="stat-label" data-i18n="stat_tools">Internal Tools Built</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">10K<span class="u">+</span></div>
+        <div class="stat-label" data-i18n="stat_orders">Daily Orders Handled</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="wrap" id="about">
+    <div class="eyebrow reveal" data-i18n="eb_profile">01 / Profile</div>
+    <div class="about-grid">
+      <div class="about-lead reveal" data-i18n="about_lead">An analyst who doesn't just <span class="hl">report the problem</span> — I build the tool that fixes it.</div>
+      <div class="about-body reveal">
+        <p data-i18n="about_p1">I've spent <strong>12+ years</strong> in logistics analytics and large-scale e-commerce fulfillment, currently as Department Manager at CMG Online (Central Group), running order operations across Shopee, Lazada, and TikTok.</p>
+        <p data-i18n="about_p2">My edge is the overlap: deep <strong>warehouse and supply-chain domain knowledge</strong> plus hands-on <strong>data engineering and automation</strong> — BigQuery pipelines, Python scripts, and production-deployed internal tools. I work as an <strong>OMS/WMS business user and UAT contributor</strong>, bridging operations, systems, and business teams.</p>
+        <p data-i18n="about_p3">I build with AI-assisted development — <strong>vibe coding</strong> with Claude, Copilot, and ChatGPT — to ship working tooling fast, without waiting on a dev queue.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WAMOER ================= -->
+  <section class="wrap" id="wamoer">
+    <div class="eyebrow reveal" data-i18n="eb_os">02 / Operating System</div>
+    <h2 class="section-title reveal" data-i18n="wamoer_title">WAMOER — my problem-solving framework.</h2>
+    <div class="wamoer-intro">
+      <p class="about-body reveal" style="margin:0;" data-i18n="wamoer_intro">A framework I built and now use as a skill to direct my own AI agents. The principle is simple: <strong style="color:var(--text);font-weight:500;">understand before you execute.</strong> It keeps complex, ambiguous work from being solved in the wrong place.</p>
+      <div class="wamoer-flow reveal">
+        <div class="bad">✕ Request <span class="arrow">→</span> Execute</div>
+        <div class="good">✓ Request <span class="arrow">→</span> <b>W</b>hy <span class="arrow">→</span> <b>A</b>ssumption <span class="arrow">→</span> <b>M</b>easure <span class="arrow">→</span> <b>O</b>ptions <span class="arrow">→</span> <b>E</b>xecute <span class="arrow">→</span> <b>R</b>esult</div>
+      </div>
+    </div>
+    <div class="wamoer-grid">
+      <div class="wphase reveal"><div class="wphase-letter">W</div><div class="wphase-name" data-i18n="wp_why_n">Why</div><div class="wphase-desc" data-i18n="wp_why_d">Understand the real problem, not just the one being asked.</div></div>
+      <div class="wphase reveal"><div class="wphase-letter">A</div><div class="wphase-name" data-i18n="wp_a_n">Assumption</div><div class="wphase-desc" data-i18n="wp_a_d">Surface the unknowns and the hidden assumptions in play.</div></div>
+      <div class="wphase reveal"><div class="wphase-letter">M</div><div class="wphase-name" data-i18n="wp_m_n">Measure</div><div class="wphase-desc" data-i18n="wp_m_d">Find the real data instead of guessing.</div></div>
+      <div class="wphase reveal"><div class="wphase-letter">O</div><div class="wphase-name" data-i18n="wp_o_n">Options</div><div class="wphase-desc" data-i18n="wp_o_d">Compare options with their trade-offs and risks.</div></div>
+      <div class="wphase reveal"><div class="wphase-letter">E</div><div class="wphase-name" data-i18n="wp_e_n">Execute</div><div class="wphase-desc" data-i18n="wp_e_d">Act only after the direction is confirmed.</div></div>
+      <div class="wphase reveal"><div class="wphase-letter">R</div><div class="wphase-name" data-i18n="wp_r_n">Result</div><div class="wphase-desc" data-i18n="wp_r_d">Measure against the success criteria set in Why, and capture the lesson.</div></div>
+    </div>
+    <div class="wamoer-foot reveal" data-i18n="wamoer_foot"><b>When it runs:</b> ambiguous, high-stakes, or multi-step work. <b>When it's skipped:</b> simple, fully-specified tasks that just need doing.</div>
+  </section>
+
+  <!-- ================= BUILD ================= -->
+  <section class="wrap" id="build">
+    <div class="eyebrow reveal" data-i18n="eb_built">03 / What I've Built</div>
+    <h2 class="section-title reveal" data-i18n="built_title">Things that shipped to production.</h2>
+    <div class="build-grid">
+
+      <div class="card reveal">
+        <div class="card-top"><span class="card-id">CASE_01</span><span class="card-tag dev">Developer / Owner</span></div>
+        <h3>cmg-stock-control</h3>
+        <p data-i18n="card1">Personally developed and deployed a production Python-based internal stock management tool, solving a warehouse visibility gap that was previously handled manually.</p>
+        <div class="card-stack"><span>Python</span><span>Production</span><span>Inventory</span></div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-top"><span class="card-id">CASE_02</span><span class="card-tag dev">Builder</span></div>
+        <h3>BigQuery Data Pipelines</h3>
+        <p data-i18n="card2">Built and integrated operational data pipelines into Google BigQuery, creating scalable department-wide reporting infrastructure, supported by Python automation that replaced manual reporting.</p>
+        <div class="card-stack"><span>BigQuery</span><span>Python</span><span>SQL</span><span>ETL</span></div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-top"><span class="card-id">CASE_03</span><span class="card-tag">Biz Coordinator</span></div>
+        <h3>Dobybot — LINE Ops Assistant</h3>
+        <p data-i18n="card3">Business-side coordinator for a conversational operations assistant on LINE. Initiated discussions, gathered requirements, coordinated stakeholders and vendor communication, and supported rollout.</p>
+        <div class="card-stack"><span>LINE API</span><span>Requirements</span><span>Rollout</span></div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-top"><span class="card-id">CASE_04</span><span class="card-tag">Biz SME / UAT</span></div>
+        <h3>Auto Run Wave</h3>
+        <p data-i18n="card4">Business representative on an OMS wave-processing automation. Defined business requirements, designed operational processes, and coordinated UAT. Technical development delivered by the RIS team.</p>
+        <div class="card-stack"><span>OMS</span><span>UAT</span><span>Process Design</span></div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-top"><span class="card-id">CASE_05</span><span class="card-tag dev">Developer</span></div>
+        <h3>Stock Dashboard &amp; Forecast</h3>
+        <p data-i18n="card5">Designed operational dashboards and a Q2 consumable forecasting model supporting warehouse readiness planning and brand-level stock monitoring across campaign cycles.</p>
+        <div class="card-stack"><span>Dashboards</span><span>Forecasting</span><span>BI</span></div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-top"><span class="card-id">CASE_06</span><span class="card-tag dev">Developer</span></div>
+        <h3>Campaign Reporting Automation</h3>
+        <p data-i18n="card6">Developed automated reporting workflows with scheduled exception alerting into LINE, replacing manual report preparation during high-volume campaign periods.</p>
+        <div class="card-stack"><span>Automation</span><span>Alerting</span><span>KPI/SLA</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= STACK ================= -->
+  <section class="wrap" id="stack">
+    <div class="eyebrow reveal" data-i18n="eb_cap">04 / Capabilities</div>
+    <h2 class="section-title reveal" data-i18n="stack_title">The stack.</h2>
+    <div class="stack-grid reveal">
+      <div class="stack-row"><div class="stack-cat" data-i18n="sc_data">Data &amp; BI</div><div class="stack-items">Google BigQuery · Power BI · SQL · Dashboard Development · KPI/SLA Monitoring</div></div>
+      <div class="stack-row"><div class="stack-cat" data-i18n="sc_prog">Programming</div><div class="stack-items">Python · Node.js · Google Apps Script · LINE Messaging API</div></div>
+      <div class="stack-row"><div class="stack-cat" data-i18n="sc_auto">Automation</div><div class="stack-items">Reporting Automation · Workflow Scripting · Exception Alerting · AI-Assisted Dev</div></div>
+      <div class="stack-row"><div class="stack-cat" data-i18n="sc_ops">Operations</div><div class="stack-items">OMS / WMS (Business User · UAT) · E-Commerce Ops · 3PL · Process Improvement</div></div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section class="wrap" id="experience">
+    <div class="eyebrow reveal" data-i18n="eb_track">05 / Track Record</div>
+    <h2 class="section-title reveal" data-i18n="exp_title">Experience.</h2>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-period">NOV 2022 — PRESENT</div>
+        <div class="tl-role" data-i18n="exp1_role">Department Manager, Order Management</div>
+        <div class="tl-org">CMG Online · Central Group</div>
+        <p class="tl-desc" data-i18n="exp1_desc">Run end-to-end order operations across Shopee, Lazada, and TikTok — tens of thousands of daily orders with same-day SLA commitments and 3PL coordination. Built the department's BigQuery reporting infrastructure, automation tooling, and KPI/SLA monitoring; contribute as business representative and UAT coordinator on OMS/WMS enhancement projects.</p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-period">2014 — 2022 · 9 YEARS</div>
+        <div class="tl-role" data-i18n="exp2_role">Analyst, Transportation</div>
+        <div class="tl-org">SC Group · Transportation Business</div>
+        <p class="tl-desc" data-i18n="exp2_desc">Nine years of foundational logistics analytics, operational reporting, and process coordination across the transportation business.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VISION ================= -->
+  <section class="wrap vision" id="vision">
+    <div class="vision-card reveal">
+      <div class="vision-flag" data-i18n="vision_flag">🇹🇭 // THE LONG GAME</div>
+      <div class="vision-quote" data-i18n="vision_quote">I want Thailand to have a <span class="hl">platform of its own</span> — one that competes globally and keeps the value at home.</div>
+      <p class="vision-body" data-i18n="vision_body">My ambition, built from years inside e-commerce operations, is to help create Thai-owned technology platforms in commerce and digital logistics. Infrastructure that retains economic value domestically, strengthens local businesses, and makes the Thai economy more resilient. I'm looking for roles where analytical and operational skills create genuine, lasting impact for Thai organizations and the people they serve.</p>
+    </div>
+  </section>
+
+  <!-- ================= CERTS ================= -->
+  <section class="wrap" id="certs">
+    <div class="eyebrow reveal" data-i18n="eb_cred">06 / Credentials</div>
+    <h2 class="section-title reveal" data-i18n="certs_title">Always compounding.</h2>
+    <div class="cert-row">
+      <div class="cert reveal">
+        <div class="cert-year">2022</div>
+        <h4 data-i18n="cert1">Data Analytics &amp; Visualization</h4>
+        <p>MICROSOFT POWER BI</p>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-year">2022</div>
+        <h4 data-i18n="cert2">Python Fundamentals</h4>
+        <p>PROGRAMMING</p>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-year">2026</div>
+        <h4 data-i18n="cert3">Google Cloud, Big Data &amp; Generative AI</h4>
+        <p>DIGITAL INTELLIGENCE BOOTCAMP</p>
+      </div>
+    </div>
+    <div class="cert-arc reveal">Power BI <span>→</span> Python <span>→</span> Cloud &amp; Big Data <span>→</span> Generative AI <span>→</span> Analytics &amp; Automation</div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="wrap contact" id="contact">
+    <div class="eyebrow reveal" style="justify-content:center;" data-i18n="eb_connect">07 / Connect</div>
+    <h2 class="reveal" data-i18n="contact_h2">Let's build something<br/><span class="accent">that matters.</span></h2>
+    <p class="contact-sub reveal" data-i18n="contact_sub">Currently building at CMG Online, and open to conversations about the right Senior Data Analyst, BI, or E-Commerce Analytics opportunity.</p>
+    <div class="contact-links reveal" style="margin-bottom:26px;">
+      <a href="Resume - Nonpawit Saisuwan v2.html" class="btn btn-primary" target="_blank" data-i18n="btn_resume">↓ Download Resume</a>
+    </div>
+    <a href="mailto:nonpawit.saisuwan@gmail.com" class="contact-mail reveal">nonpawit.saisuwan@gmail.com</a>
+  </section>
+
+  <footer>
+    <span>© 2026 NONPAWIT SAISUWAN</span>
+    <span>BANGKOK · THAILAND // BUILT WITH VIBE CODING</span>
+  </footer>
+
+</main>
+
+<script>
+// nav scroll state
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 30));
+
+// reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = (Math.min(i % 6, 5) * 0.06) + 's';
+  io.observe(el);
+});
+
+// animated counters
+function animateCounter(el) {
+  const target = +el.dataset.target;
+  const suffix = el.dataset.suffix || '';
+  const dur = 1100; const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const statIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && e.target.dataset.target) { animateCounter(e.target); statIO.unobserve(e.target); }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-num[data-target]').forEach(el => statIO.observe(el));
+
+// ============= BILINGUAL TOGGLE =============
+const TH = {
+  nav_built: "ผลงาน", nav_stack: "ทักษะ", nav_exp: "ประสบการณ์", nav_vision: "วิสัยทัศน์", nav_contact: "ติดต่อ",
+  hero_status: '<span class="dot"></span>เปิดรับโอกาสที่ใช่',
+  hero_sub: "นักวิเคราะห์ข้อมูลและปฏิบัติการ ที่เปลี่ยนความซับซ้อนของคลังสินค้าและ e-commerce ให้เป็น data pipeline แดชบอร์ด และเครื่องมือที่ใช้งานได้จริง",
+  hero_roles: '// <span>12+ ปี</span> ด้านปฏิบัติการและการวิเคราะห์ · BigQuery · Python · Power BI · vibe coding',
+  btn_resume: "↓ ดาวน์โหลดเรซูเม่", btn_work: "ดูผลงาน",
+  stat_years: "ประสบการณ์ (ปี)", stat_projects: "โปรเจกต์ที่ใช้งานจริง", stat_tools: "เครื่องมือที่สร้างเอง", stat_orders: "ออเดอร์ต่อวันที่ดูแล",
+  eb_profile: "01 / โปรไฟล์",
+  about_lead: 'นักวิเคราะห์ที่ไม่ได้แค่ <span class="hl">รายงานปัญหา</span> — แต่ลงมือสร้างเครื่องมือมาแก้มัน',
+  about_p1: 'ผมอยู่ในสายงานวิเคราะห์โลจิสติกส์และ e-commerce fulfillment มากกว่า <strong>12 ปี</strong> ปัจจุบันเป็น Department Manager ที่ CMG Online (เซ็นทรัล กรุ๊ป) ดูแลงาน order operations ข้ามแพลตฟอร์ม Shopee, Lazada และ TikTok',
+  about_p2: 'จุดแข็งของผมคือจุดตัด: มีทั้ง <strong>ความรู้เชิงลึกด้านคลังสินค้าและ supply chain</strong> บวกกับทักษะ <strong>data engineering และ automation</strong> — BigQuery pipelines, สคริปต์ Python และเครื่องมือภายในที่ deploy จริง ทำงานในฐานะ <strong>OMS/WMS business user และ UAT contributor</strong> เชื่อมงานฝั่งปฏิบัติการ ระบบ และธุรกิจเข้าด้วยกัน',
+  about_p3: 'ผมสร้างงานด้วยแนวทาง AI-assisted development — <strong>vibe coding</strong> ร่วมกับ Claude, Copilot และ ChatGPT — เพื่อส่งมอบเครื่องมือที่ใช้งานได้จริงได้เร็ว โดยไม่ต้องรอคิว dev',
+  eb_os: "02 / ระบบการทำงาน",
+  wamoer_title: "WAMOER — เฟรมเวิร์กแก้ปัญหาของผม",
+  wamoer_intro: 'เฟรมเวิร์กที่ผมสร้างเอง และใช้เป็น skill ในการสั่งงาน AI agent ของตัวเอง หลักการง่ายๆ คือ: <strong style="color:var(--text);font-weight:500;">เข้าใจก่อน ทำทีหลัง</strong> ป้องกันการแก้ปัญหาผิดจุดตั้งแต่ต้น',
+  wp_why_n: "ทำไม", wp_why_d: "เข้าใจปัญหาที่แท้จริง ไม่ใช่แค่สิ่งที่ถูกถาม",
+  wp_a_n: "สมมติฐาน", wp_a_d: "ระบุสิ่งที่ยังไม่รู้และสมมติฐานที่ซ่อนอยู่",
+  wp_m_n: "วัดผล", wp_m_d: "หาข้อมูลจริงแทนการเดา",
+  wp_o_n: "ทางเลือก", wp_o_d: "เปรียบเทียบทางเลือก พร้อม trade-off และความเสี่ยง",
+  wp_e_n: "ลงมือ", wp_e_d: "ลงมือทำหลังยืนยันทิศทางแล้วเท่านั้น",
+  wp_r_n: "ผลลัพธ์", wp_r_d: "วัดผลเทียบกับเกณฑ์ความสำเร็จที่ตั้งไว้ตั้งแต่ Why และเก็บบทเรียน",
+  wamoer_foot: '<b>ใช้เมื่อ:</b> งานที่ scope ไม่ชัด มีความเสี่ยงสูง หรือหลายขั้นตอน <b>ข้ามเมื่อ:</b> งานง่าย ชัดเจน ที่แค่ลงมือทำ',
+  eb_built: "03 / สิ่งที่ผมสร้าง", built_title: "สิ่งที่ปล่อยใช้งานจริง",
+  card1: "พัฒนาและ deploy เครื่องมือจัดการสต็อกภายในด้วย Python ขึ้นใช้งานจริงด้วยตัวเอง แก้ปัญหา visibility ของสต็อกคลังที่เดิมต้องทำมือ",
+  card2: "สร้างและ integrate data pipeline เข้า Google BigQuery เป็นโครงสร้าง reporting ระดับแผนก สนับสนุนด้วย Python automation ที่แทนงานรายงานแบบมือ",
+  card3: "ผู้ประสานงานฝั่งธุรกิจของ conversational assistant บน LINE ริเริ่มการพูดคุย รวบรวม requirement ประสาน stakeholder และ vendor รวมถึงสนับสนุน rollout",
+  card4: "ตัวแทนฝั่งธุรกิจของระบบ automation บน OMS กำหนด business requirement ออกแบบ process และประสาน UAT ส่วนการพัฒนาทางเทคนิคดำเนินการโดยทีม RIS",
+  card5: "ออกแบบ operational dashboard และโมเดล forecast ของ consumable ไตรมาส 2 สนับสนุนการวางแผนความพร้อมของคลังและติดตามสต็อกระดับแบรนด์",
+  card6: "พัฒนา workflow การรายงานอัตโนมัติ พร้อมแจ้งเตือน exception เข้า LINE แทนการทำรายงานด้วยมือช่วงแคมเปญที่มีออเดอร์สูง",
+  eb_cap: "04 / ความสามารถ", stack_title: "เครื่องมือที่ใช้",
+  sc_data: "ข้อมูล & BI", sc_prog: "การเขียนโปรแกรม", sc_auto: "ระบบอัตโนมัติ", sc_ops: "ปฏิบัติการ",
+  eb_track: "05 / ประวัติการทำงาน", exp_title: "ประสบการณ์",
+  exp1_role: "Department Manager, Order Management", exp1_desc: "ดูแล order operations แบบ end-to-end ข้าม Shopee, Lazada และ TikTok — หลายหมื่นออเดอร์ต่อวัน พร้อม SLA same-day และประสานงาน 3PL สร้างโครงสร้าง reporting บน BigQuery, เครื่องมือ automation และระบบ KPI/SLA ของแผนก รวมถึงร่วมเป็นตัวแทนธุรกิจและ UAT ในโปรเจกต์ OMS/WMS",
+  exp2_role: "Analyst, Transportation", exp2_desc: "9 ปีของการวางรากฐานด้าน logistics analytics การทำรายงานปฏิบัติการ และการประสาน process ในธุรกิจขนส่ง",
+  vision_flag: "🇹🇭 // เป้าหมายระยะยาว",
+  vision_quote: 'ผมอยากให้ประเทศไทยมี <span class="hl">แพลตฟอร์มของตัวเอง</span> — ที่แข่งขันระดับโลกได้ และเก็บมูลค่าไว้ในประเทศ',
+  vision_body: "ความฝันของผมที่สั่งสมจากประสบการณ์ในวงการ e-commerce คือการมีส่วนช่วยสร้างแพลตฟอร์มเทคโนโลยีของคนไทยในวงการค้าและ digital logistics — โครงสร้างพื้นฐานที่เก็บมูลค่าทางเศรษฐกิจไว้ในประเทศ เสริมความแข็งแกร่งให้ธุรกิจไทย ผมมองหางานที่ทักษะด้านข้อมูลและปฏิบัติการจะสร้าง impact ที่แท้จริงให้องค์กรไทยได้",
+  eb_cred: "06 / วุฒิบัตร", certs_title: "พัฒนาไม่หยุด",
+  cert1: "Data Analytics & Visualization", cert2: "Python Fundamentals", cert3: "Google Cloud, Big Data & Generative AI",
+  eb_connect: "07 / ติดต่อ",
+  contact_h2: 'มาสร้างสิ่งที่<br/><span class="accent">มีความหมายกัน</span>',
+  contact_sub: "ตอนนี้ทำงานที่ CMG Online และเปิดรับพูดคุยถึงโอกาส Senior Data Analyst, BI หรือ E-Commerce Analytics ที่ใช่"
+};
+
+const i18nEls = document.querySelectorAll('[data-i18n]');
+i18nEls.forEach(el => el.dataset.en = el.innerHTML);
+const langBtn = document.getElementById('langToggle');
+function setLang(lang) {
+  i18nEls.forEach(el => {
+    const k = el.dataset.i18n;
+    el.innerHTML = (lang === 'th' && TH[k] != null) ? TH[k] : el.dataset.en;
+  });
+  document.documentElement.lang = lang;
+  langBtn.innerHTML = '<span class="globe"></span>' + (lang === 'th' ? 'EN' : 'ไทย');
+  try { localStorage.setItem('ns_portfolio_lang', lang); } catch(e){}
+}
+langBtn.addEventListener('click', () => {
+  setLang(document.documentElement.lang === 'th' ? 'en' : 'th');
+});
+try { if (localStorage.getItem('ns_portfolio_lang') === 'th') setLang('th'); } catch(e){}
+</script>
+
+</body>
+</html>
