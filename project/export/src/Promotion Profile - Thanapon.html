@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Role Transition Profile — Thanapon Suwattanakundee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+    <rect width="400" height="400" fill="#F5F2F2"/>
+    <rect x="0" y="0" width="400" height="60" fill="#C8102E"/>
+    <rect x="60" y="120" width="280" height="200" fill="#FFFFFF" stroke="#C8102E" stroke-width="2"/>
+    <text x="200" y="235" text-anchor="middle" font-family="Inter, sans-serif" font-size="72" font-weight="700" fill="#1A1A1A" letter-spacing="-2">TS</text>
+    <text x="200" y="280" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#C8102E" letter-spacing="3">ROLE TRANSITION</text>
+  </svg>
+</template>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #BFBFBF;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-feature-settings: "kern", "liga", "ss01";
+    -webkit-font-smoothing: antialiased;
+    color: #1A1A1A;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
+    min-height: 100vh;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    background: #FFFFFF;
+    box-shadow: 0 6px 40px rgba(0,0,0,0.18);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media print {
+    body { background: #FFFFFF; padding: 0; display: block; }
+    .page { box-shadow: none; margin: 0; }
+  }
+
+  :root {
+    --maroon: #C8102E;
+    --maroon-deep: #9A0C23;
+    --ink: #1A1A1A;
+    --sub: #595959;
+    --rule: #D9D9D9;
+    --tint: #F7F3F3;
+    --eyebrow: 8pt;
+    --body: 8.5pt;
+    --micro: 7.5pt;
+    --section: 10.5pt;
+    --name: 26pt;
+    --subtitle: 11pt;
+  }
+
+  /* ============================================================
+     HERO BAND  (full-bleed top, editorial)
+     ============================================================ */
+  .hero {
+    padding: 15mm 15mm 8mm 15mm;
+    border-bottom: 3pt solid var(--maroon);
+    display: grid;
+    grid-template-columns: 32mm 1fr;
+    column-gap: 10mm;
+    align-items: end;
+  }
+
+  .photo {
+    width: 32mm;
+    height: 40mm;
+    background: #ECECEC;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    display: block;
+  }
+
+  .hero-eyebrow {
+    font-size: var(--eyebrow);
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--maroon);
+    text-transform: uppercase;
+  }
+  .hero-name {
+    font-size: var(--name);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.6px;
+    color: var(--ink);
+    margin-top: 3mm;
+  }
+  .hero-role {
+    margin-top: 2.5mm;
+    font-size: var(--subtitle);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .hero-role .pipe {
+    color: var(--maroon);
+    margin: 0 6px;
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-size: 9pt;
+    color: var(--sub);
+    margin-top: 1.5mm;
+  }
+
+  /* ============================================================
+     META STRIP  (4 columns under hero)
+     ============================================================ */
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--tint);
+    padding: 5mm 15mm;
+    column-gap: 8mm;
+    border-bottom: 1px solid var(--rule);
+  }
+  .meta-col + .meta-col {
+    border-left: 1px solid var(--rule);
+    padding-left: 8mm;
+  }
+  .meta-h {
+    font-size: var(--micro);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--maroon);
+    text-transform: uppercase;
+    margin-bottom: 2mm;
+  }
+  .meta-body {
+    font-size: var(--body);
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .meta-body .muted { color: var(--sub); }
+  .meta-body strong { font-weight: 600; }
+  .meta-body .row { display: block; }
+  .meta-body .row + .row { margin-top: 0.5mm; }
+
+  /* ============================================================
+     BODY
+     ============================================================ */
+  .body {
+    flex: 1;
+    padding: 8mm 15mm 8mm 15mm;
+    display: flex;
+    flex-direction: column;
+    gap: 4mm;
+    min-height: 0;
+  }
+
+  .sec-h {
+    display: flex;
+    align-items: baseline;
+    gap: 4mm;
+    margin-bottom: 2.5mm;
+  }
+  .sec-h .num {
+    font-size: 18pt;
+    font-weight: 700;
+    color: var(--maroon);
+    line-height: 1;
+    letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .sec-h .label {
+    font-size: var(--section);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  .sec-h::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    align-self: center;
+    margin-left: 2mm;
+  }
+
+  .sec-body {
+    font-size: var(--body);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .sec-body p + p { margin-top: 1.6mm; }
+
+  /* parts grid */
+  .parts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 8mm;
+    row-gap: 3mm;
+  }
+  .part-card {
+    display: grid;
+    grid-template-columns: 10mm 1fr;
+    column-gap: 3mm;
+  }
+  .part-card .ico {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: var(--maroon);
+    letter-spacing: 1px;
+    padding-top: 0.5mm;
+    border-top: 2pt solid var(--maroon);
+    text-align: left;
+    align-self: start;
+  }
+  .part-card .content {
+    font-size: var(--body);
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .part-card .content .t {
+    font-weight: 700;
+    color: var(--maroon-deep);
+    letter-spacing: 0.3px;
+    display: block;
+    margin-bottom: 0.8mm;
+    font-size: 9pt;
+  }
+
+  .part-group-h {
+    font-size: var(--micro);
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--sub);
+    text-transform: uppercase;
+    margin: 1mm 0 2mm 0;
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+  }
+  .part-group-h::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .foot {
+    margin-top: auto;
+    padding: 4mm 15mm;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: var(--micro);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--sub);
+  }
+  .foot .right { color: var(--maroon); font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <article class="page" data-screen-label="01 Role Transition Profile">
+
+    <!-- =================== HERO =================== -->
+    <header class="hero">
+      <div class="photo"><img src="headshot-thanapon.png" alt="Thanapon Suwattanakundee" /></div>
+      <div>
+        <div class="hero-eyebrow">Role Transition Profile</div>
+        <div class="hero-name">Thanapon Suwattanakundee</div>
+        <div class="hero-role">Inventory &amp; Admin <span class="pipe">/</span> Position Change</div>
+        <div class="hero-sub">Inventory &amp; Admin Excellence — SAP &amp; FC Accuracy</div>
+      </div>
+    </header>
+
+    <!-- =================== META STRIP =================== -->
+    <section class="meta">
+      <div class="meta-col">
+        <div class="meta-h">Contact</div>
+        <div class="meta-body">
+          <span class="row">Work Location</span>
+          <span class="row">Country</span>
+          <span class="row muted">email@company.com</span>
+          <span class="row muted">ID · 00000000</span>
+        </div>
+      </div>
+      <div class="meta-col">
+        <div class="meta-h">Education</div>
+        <div class="meta-body">
+          <span class="row"><strong>Degree</strong></span>
+          <span class="row">University Name</span>
+          <span class="row muted">Field of Study</span>
+        </div>
+      </div>
+      <div class="meta-col">
+        <div class="meta-h">Experience</div>
+        <div class="meta-body">
+          <span class="row"><strong>Current Company</strong></span>
+          <span class="row muted">Inventory &amp; Admin</span>
+          <span class="row muted">Start — Present</span>
+        </div>
+      </div>
+      <div class="meta-col">
+        <div class="meta-h">Skills</div>
+        <div class="meta-body">
+          SAP · FC System · Inventory Control · Cycle Count · RF Scan · Warehouse Layout
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== BODY =================== -->
+    <main class="body">
+
+      <section>
+        <div class="sec-h">
+          <span class="num">01</span>
+          <span class="label">Executive Summary</span>
+        </div>
+        <div class="sec-body">
+          <p>Focused on the accuracy of all systems by bridging Inventory and Admin functions to control and improve data accuracy across <strong>SAP</strong> and <strong>FC</strong> systems. Closes error gaps and strengthens verification efficiency from origin to destination across the warehouse operation.</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-h">
+          <span class="num">02</span>
+          <span class="label">Scope of Responsibility</span>
+        </div>
+
+        <div class="parts">
+
+          <div class="part-group-h">Part 1 — Inventory</div>
+
+          <div class="part-card">
+            <div class="ico">1.1</div>
+            <div class="content">
+              <span class="t">Data Management</span>
+              Controls accuracy of all Raw Data Inbound and Outbound within the warehouse. Manages staff attendance scheduling and daily OT control.
+            </div>
+          </div>
+          <div class="part-card">
+            <div class="ico">1.2</div>
+            <div class="content">
+              <span class="t">Inventory Efficiency</span>
+              Monitors Empty Location and Racking Utilization; inspects RF Scan accuracy and High Value items; runs Cycle Count and daily Variance checks to reduce Stock Loss.
+            </div>
+          </div>
+          <div class="part-card">
+            <div class="ico">1.3</div>
+            <div class="content">
+              <span class="t">Space Planning &amp; Structure</span>
+              Designs warehouse Layout and calculates optimal storage capacity. Oversees Stock Take and Stock Destroy processes end-to-end.
+            </div>
+          </div>
+          <div class="part-card">
+            <div class="ico">1.4</div>
+            <div class="content">
+              <span class="t">Warehouse Cost Control</span>
+              Controls and manages consumables usage across the operation. Validates Warehouse Charge Bill accuracy prior to approval.
+            </div>
+          </div>
+
+          <div class="part-group-h">Part 2 — Admin</div>
+
+          <div class="part-card">
+            <div class="ico">2.1</div>
+            <div class="content">
+              <span class="t">Admin Invoice</span>
+              Reconciles Invoice data between <strong>SAP</strong> and <strong>FC</strong> systems to eliminate errors. Improved the PTL (Put to Light) upload process to minimize defects.
+            </div>
+          </div>
+          <div class="part-card">
+            <div class="ico">2.2</div>
+            <div class="content">
+              <span class="t">Admin CN</span>
+              Enhanced verification and reconciliation between SAP &amp; FC. Controls MIM document accuracy before system intake into SAP. Coordinates with RTW frontline team on a Tracking system for returns from stores before FC scan-in.
+            </div>
+          </div>
+          <div class="part-card">
+            <div class="ico">2.3</div>
+            <div class="content">
+              <span class="t">Admin GR</span>
+              Manages transport booking system and Inbound / GR data. Aligns FC &amp; SAP data, anchoring on SAP as the source of truth.
+            </div>
+          </div>
+          <div class="part-card">
+            <div class="ico">2.4</div>
+            <div class="content">
+              <span class="t">End-to-End Billing</span>
+              Oversees billing document flow to FAST and the company accounting team. Designed a billing structure that is fully Traceable from origin to destination.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-h">
+          <span class="num">03</span>
+          <span class="label">Core Strengths</span>
+        </div>
+        <div class="sec-body">
+          <p>Strong working knowledge of warehouse internal management systems and the ability to translate operational data into practical guidance for the team. Proactively inspects systems to catch errors before they propagate downstream.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- =================== FOOTER =================== -->
+    <footer class="foot">
+      <span>Prepared for Role Transition Review</span>
+      <span class="right">Confidential</span>
+    </footer>
+
+  </article>
+
+</body>
+</html>

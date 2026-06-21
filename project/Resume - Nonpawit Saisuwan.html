@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Resume — Nonpawit Saisuwan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+/* ===================================================
+   PRINT — Two A4 pages
+   =================================================== */
+@page { size: A4 portrait; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red: #C8102E;
+  --ink: #111111;
+  --sub: #4A4A4A;
+  --light: #787878;
+  --rule: #DEDEDE;
+  --tint: #F8F4F4;
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --mg: 13mm;
+}
+
+html, body {
+  background: #CACACA;
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 8.5pt;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 0;
+  gap: 16px;
+}
+
+@media print {
+  html, body { background: #FFF; padding: 0; gap: 0; display: block; }
+  .page { box-shadow: none !important; }
+  .no-print { display: none !important; }
+  .page-break { page-break-before: always; }
+}
+
+/* ===================================================
+   PAGE SHELL
+   =================================================== */
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: #FFFFFF;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* ===================================================
+   PAGE 1 HEADER
+   =================================================== */
+.pg1-header {
+  padding: 13mm var(--mg) 5mm var(--mg);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 10mm;
+  align-items: end;
+  border-bottom: 2.5pt solid var(--red);
+}
+
+.pg1-name {
+  font-size: 23pt;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.pg1-title {
+  font-size: 9pt;
+  font-weight: 500;
+  color: var(--red);
+  margin-top: 2.5mm;
+  letter-spacing: 0.2px;
+}
+
+.pg1-tagline {
+  margin-top: 1.5mm;
+  font-size: 8.2pt;
+  color: var(--sub);
+  line-height: 1.4;
+}
+
+.pg1-contact {
+  text-align: right;
+  font-size: 8pt;
+  line-height: 1.7;
+  color: var(--sub);
+}
+.pg1-contact .c-label {
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--red);
+  display: block;
+  margin-bottom: 1mm;
+}
+
+/* ===================================================
+   BODY — PAGE 1
+   =================================================== */
+.pg1-body {
+  padding: 5mm var(--mg) 10mm var(--mg);
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+
+/* ===================================================
+   SECTION HEADER
+   =================================================== */
+.sec-h {
+  display: flex;
+  align-items: center;
+  gap: 4mm;
+  margin-bottom: 3mm;
+}
+.sec-h .bar {
+  width: 3pt;
+  height: 12pt;
+  background: var(--red);
+  flex-shrink: 0;
+}
+.sec-h .lbl {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: var(--red);
+  text-transform: uppercase;
+}
+.sec-h::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ===================================================
+   EXECUTIVE SUMMARY
+   =================================================== */
+.summary-text {
+  font-size: 8.5pt;
+  line-height: 1.46;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+/* ===================================================
+   CORE COMPETENCIES
+   =================================================== */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2mm 3mm;
+}
+.chip {
+  font-size: 7.8pt;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--tint);
+  border: 1px solid var(--rule);
+  padding: 1.5mm 3mm;
+  white-space: nowrap;
+  letter-spacing: 0.1px;
+}
+
+/* ===================================================
+   EXPERIENCE
+   =================================================== */
+.role + .role { margin-top: 3mm; }
+
+.role-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  column-gap: 4mm;
+}
+.role-company {
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: var(--ink);
+}
+.role-period {
+  font-size: 8pt;
+  color: var(--light);
+  white-space: nowrap;
+  font-weight: 500;
+}
+.role-title {
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--red);
+  margin-top: 0.8mm;
+}
+.role-meta {
+  font-size: 7.8pt;
+  color: var(--light);
+  margin-top: 0.5mm;
+}
+
+.role-sub-h {
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--sub);
+  margin: 3mm 0 1.5mm 0;
+  padding-bottom: 0.8mm;
+  border-bottom: 1px dotted var(--rule);
+}
+
+ul.bl {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2mm;
+}
+ul.bl li {
+  padding-left: 5mm;
+  position: relative;
+  font-size: 8.8pt;
+  line-height: 1.45;
+  color: var(--ink);
+}
+ul.bl li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 4px;
+  height: 4px;
+  background: var(--red);
+}
+
+/* ===================================================
+   PAGE 2 BODY
+   =================================================== */
+.pg2-body {
+  padding: var(--mg) var(--mg) var(--mg) var(--mg);
+  display: flex;
+  flex-direction: column;
+  gap: 6mm;
+}
+
+/* Projects grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8mm;
+  row-gap: 3.5mm;
+}
+.proj {
+  border-left: 2pt solid var(--red);
+  padding-left: 3.5mm;
+}
+.proj-name {
+  font-size: 8.8pt;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.8mm;
+}
+.proj-body {
+  font-size: 8pt;
+  line-height: 1.45;
+  color: var(--sub);
+}
+
+/* Skills table-style */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 36mm 1fr;
+  row-gap: 2mm;
+  column-gap: 6mm;
+}
+.sk-cat {
+  font-size: 7.8pt;
+  font-weight: 700;
+  color: var(--sub);
+  letter-spacing: 0.3px;
+  padding-top: 0.2mm;
+}
+.sk-val {
+  font-size: 8.5pt;
+  color: var(--ink);
+  line-height: 1.45;
+}
+.sk-val + .sk-cat {
+  border-top: 1px dotted var(--rule);
+  padding-top: 2mm;
+}
+
+/* Two-col bottom sections */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8mm;
+  row-gap: 5mm;
+}
+.bottom-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+.bottom-row {
+  display: grid;
+  grid-template-columns: 30mm 1fr;
+  column-gap: 3mm;
+  font-size: 8.5pt;
+  line-height: 1.4;
+}
+.bottom-row .k { color: var(--light); font-weight: 500; }
+.bottom-row .v { color: var(--ink); }
+
+/* Systems chips (alternate look) */
+.sys-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5mm 2.5mm;
+}
+.sys-chip {
+  font-size: 7.8pt;
+  font-weight: 500;
+  color: var(--sub);
+  border: 1px solid var(--rule);
+  padding: 1mm 2.5mm;
+}
+.sys-chip.hi {
+  border-color: var(--red);
+  color: var(--red);
+  font-weight: 600;
+  background: var(--tint);
+}
+
+/* Page number */
+.pg-num {
+  position: absolute;
+  bottom: 8mm;
+  right: var(--mg);
+  font-size: 7pt;
+  letter-spacing: 1.5px;
+  color: var(--light);
+  text-transform: uppercase;
+}
+.pg-watermark {
+  position: absolute;
+  bottom: 8mm;
+  left: var(--mg);
+  font-size: 7pt;
+  letter-spacing: 1.5px;
+  color: var(--light);
+  text-transform: uppercase;
+}
+
+/* ===================================================
+   REVIEW SECTION (screen only)
+   =================================================== */
+.review-wrap {
+  width: var(--page-w);
+  background: #1A1A1A;
+  color: #E5E5E5;
+  padding: 12mm var(--mg);
+  display: flex;
+  flex-direction: column;
+  gap: 7mm;
+}
+.rv-title {
+  font-size: 11pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  border-bottom: 1px solid #333;
+  padding-bottom: 3mm;
+}
+.rv-h {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 2.5mm;
+}
+.rv-body {
+  font-size: 8.8pt;
+  line-height: 1.6;
+  color: #C8C8C8;
+}
+.rv-body strong { color: #EEEEEE; }
+.rv-body p + p { margin-top: 2mm; }
+.rv-body ul { padding-left: 5mm; }
+.rv-body ul li { margin-top: 1.2mm; }
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 5mm;
+  font-size: 9pt;
+}
+.score-num {
+  font-size: 28pt;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  min-width: 22mm;
+  letter-spacing: -1px;
+}
+.score-bar-track {
+  flex: 1;
+  height: 5px;
+  background: #333;
+}
+.score-bar-fill {
+  height: 100%;
+  background: var(--red);
+}
+.rv-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10mm;
+  row-gap: 5mm;
+}
+.salary-box {
+  background: #242424;
+  border: 1px solid #333;
+  border-left: 3pt solid var(--red);
+  padding: 4mm 5mm;
+}
+.salary-role {
+  font-size: 7.8pt;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1.5mm;
+}
+.salary-range {
+  font-size: 13pt;
+  font-weight: 700;
+  color: #EEEEEE;
+  line-height: 1.1;
+}
+.salary-note {
+  font-size: 7.5pt;
+  color: #888;
+  margin-top: 1mm;
+}
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2mm 3mm;
+}
+.tag {
+  font-size: 7.8pt;
+  padding: 1.5mm 3mm;
+  border: 1px solid #333;
+  color: #AAAAAA;
+}
+.tag.missing {
+  border-color: #C8102E55;
+  color: #C8A0A0;
+}
+</style>
+</head>
+<body>
+
+<!-- ========================================================
+     PAGE 1
+     ======================================================== -->
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="pg1-header">
+    <div>
+      <div class="pg1-name">Nonpawit Saisuwan</div>
+      <div class="pg1-title">Operations Data &amp; Automation Analyst · E-Commerce · Supply Chain</div>
+      <div class="pg1-tagline">BigQuery · Python · Automation Engineering · Warehouse Operations · E-Commerce Fulfillment</div>
+    </div>
+    <div class="pg1-contact">
+      <span class="c-label">Contact</span>
+      Bangna Distribution Center KM.21, Bangkok<br/>
+      sanonpawit@central.co.th<br/>
+      Employee ID · 20241332<br/>
+      Thai National
+    </div>
+  </header>
+
+  <div class="pg1-body">
+
+    <!-- EXECUTIVE SUMMARY -->
+    <section>
+      <div class="sec-h"><div class="bar"></div><div class="lbl">Executive Summary</div></div>
+      <p class="summary-text">
+        Operations-focused Data &amp; Automation Analyst with <strong>12+ years of experience</strong> spanning logistics analytics and large-scale e-commerce fulfillment operations. Currently serving as Department Manager at CMG Online (Central Group), with hands-on expertise building data infrastructure, automating operational workflows, and developing BI tools that improve decision-making at scale. Combines deep warehouse and supply chain domain knowledge with practical data engineering skills — BigQuery pipelines, Python automation, and production-deployed internal tools. Self-initiated projects consistently beyond formal scope. CG Competency: <strong>Leading Innovation — High.</strong>
+      </p>
+    </section>
+
+    <!-- CORE COMPETENCIES -->
+    <section>
+      <div class="sec-h"><div class="bar"></div><div class="lbl">Core Competencies</div></div>
+      <div class="chips">
+        <span class="chip">Data Pipeline Engineering</span>
+        <span class="chip">Dashboard Development</span>
+        <span class="chip">KPI &amp; SLA Monitoring</span>
+        <span class="chip">Automation Engineering</span>
+        <span class="chip">Google BigQuery</span>
+        <span class="chip">Python Scripting</span>
+        <span class="chip">Operational Reporting</span>
+        <span class="chip">E-Commerce Operations</span>
+        <span class="chip">Warehouse Management</span>
+        <span class="chip">Supply Chain Analytics</span>
+        <span class="chip">Campaign Operations</span>
+        <span class="chip">3PL Coordination</span>
+        <span class="chip">Exception Management</span>
+        <span class="chip">Process Improvement</span>
+        <span class="chip">Cross-functional Collaboration</span>
+        <span class="chip">Production Tool Deployment</span>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section>
+      <div class="sec-h"><div class="bar"></div><div class="lbl">Professional Experience</div></div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-company">CMG Online — Central Group</div>
+          <div class="role-period">Nov 2022 – Present · 3 Y 5 M</div>
+        </div>
+        <div class="role-title">Department Manager, Order Management</div>
+        <div class="role-meta">CMG WH Operation · SCM — Logistics / Depot · Bangna DC KM.21</div>
+
+        <div class="role-sub-h">Operational Ownership</div>
+        <ul class="bl">
+          <li>Managed end-to-end order operations across <strong>Shopee, Lazada, and TikTok</strong> platforms, overseeing tens of thousands of daily orders through picking and 3PL handover.</li>
+          <li>Owned SLA management for same-day delivery commitments and exception management across all marketplace channels.</li>
+          <li>Oversaw cross-functional coordination between warehouse operations, systems, and business teams.</li>
+          <li>Governed operational reporting cadence and data governance for the department.</li>
+        </ul>
+
+        <div class="role-sub-h">Data, Automation &amp; Tools Delivered</div>
+        <ul class="bl">
+          <li>Built and integrated operational data pipelines into <strong>Google BigQuery</strong>, creating scalable reporting infrastructure; supported by <strong>Python &amp; Node.js</strong> automation scripts that eliminated repetitive manual reporting.</li>
+          <li>Led implementation of the <strong>Autorunwave</strong> automated wave-processing system — replacing manual wave creation and scaling platform-specific order handling across all channels.</li>
+          <li>Led <strong>Project Dobybot</strong> — a LINE-based conversational operations assistant enabling natural language queries for orders, stock, and campaign status during high-volume periods.</li>
+          <li>Personally developed and deployed <strong>cmg-stock-control</strong> to production — internal stock management tool addressing an operational gap previously handled manually.</li>
+          <li>Designed <strong>Stock Dashboard and Q2 Consumable Forecast</strong> systems; built hourly tracking reports and automated dashboards for proactive campaign visibility.</li>
+          <li>Enhanced <strong>KPI/SLA monitoring frameworks</strong> to improve operational visibility, escalation management, and cross-functional performance alignment.</li>
+        </ul>
+      </div>
+
+    </section>
+
+  </div><!-- /pg1-body -->
+
+  <div class="pg-watermark">Nonpawit Saisuwan · Resume 2026</div>
+  <div class="pg-num">Page 1 of 2</div>
+</div>
+
+<!-- ========================================================
+     PAGE 2
+     ======================================================== -->
+<div class="page page-break">
+
+  <div class="pg2-body">
+
+    <!-- PRIOR EXPERIENCE -->
+    <section>
+      <div class="sec-h"><div class="bar"></div><div class="lbl">Prior Experience</div></div>
+      <div class="role">
+        <div class="role-header">
+          <div class="role-company">SC Group — Transportation Business</div>
+          <div class="role-period">2014 – 2022 · 9 Years</div>
+        </div>
+        <div class="role-title">Analyst, Transportation</div>
+        <div class="role-meta">Thailand</div>
+        <ul class="bl" style="margin-top:2mm;">
+          <li>9 years of foundational experience in logistics analytics and operational coordination within the transportation sector.</li>
+          <li>Supported data analysis, operational reporting, and process improvement across supply chain functions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SELECTED PROJECTS -->
+    <section>
+      <div class="sec-h"><div class="bar"></div><div class="lbl">Selected Projects</div></div>
+      <div class="projects-grid">
+
+        <div class="proj">
+          <div class="proj-name">Autorunwave — Wave Processing Automation</div>
+          <p class="proj-body">Designed and implemented an automated wave-processing engine replacing manual order wave creation. Scaled platform-specific handling across Shopee, Lazada, and TikTok. Reduced manual coordination effort and improved throughput during peak campaign periods.</p>
+        </div>
+
+        <div class="proj">
+          <div class="proj-name">BigQuery Operational Data Infrastructure</div>
+          <p class="proj-body">Built end-to-end data pipelines integrated into Google BigQuery, providing scalable department-wide reporting infrastructure. Supported by Python and Node.js automation replacing repetitive manual tasks and improving cross-functional data access.</p>
+        </div>
+
+        <div class="proj">
+          <div class="proj-name">cmg-stock-control — Internal Stock Tool</div>
+          <p class="proj-body">Personally designed and deployed a production-grade internal stock management application, addressing a real operational gap previously reliant on manual coordination. Self-initiated beyond formal job scope.</p>
+        </div>
+
+        <div class="proj">
+          <div class="proj-name">Project Dobybot — LINE Operations Assistant</div>
+          <p class="proj-body">Led development of a conversational operations assistant on LINE, enabling the team to query live operational data — orders, stock, campaign status — through natural language, reducing dashboard dependency during high-volume periods.</p>
+        </div>
+
+        <div class="proj">
+          <div class="proj-name">Stock Dashboard &amp; Consumable Forecast</div>
+          <p class="proj-body">Designed warehouse operations dashboards and a Q2 consumable forecasting model supporting brand-level monitoring and warehouse readiness planning across campaign cycles.</p>
+        </div>
+
+        <div class="proj">
+          <div class="proj-name">Automated Campaign Reporting Workflows</div>
+          <p class="proj-body">Established scheduled exception alerting pipelines integrated into LINE for the operations team, improving reporting timeliness and supporting the team during high-volume campaign periods.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TECHNICAL SKILLS -->
+    <section>
+      <div class="sec-h"><div class="bar"></div><div class="lbl">Technical Skills</div></div>
+      <div class="skills-grid">
+        <div class="sk-cat">Programming</div>
+        <div class="sk-val">Python · Node.js</div>
+        <div class="sk-cat">Data &amp; BI</div>
+        <div class="sk-val">Google BigQuery · SQL · Dashboard Development · Data Pipeline Engineering · KPI Development · Operational Reporting</div>
+        <div class="sk-cat">Automation</div>
+        <div class="sk-val">Workflow Automation · Scheduled Reporting · Exception Alerting · LINE Messaging API · Process Scripting</div>
+        <div class="sk-cat">Domain</div>
+        <div class="sk-val">E-Commerce Operations · Warehouse Management · Supply Chain Analytics · Campaign Operations · 3PL Coordination · SLA Management · Fulfillment Operations</div>
+      </div>
+    </section>
+
+    <!-- SYSTEMS & EDUCATION — bottom 2 col -->
+    <section>
+      <div class="sec-h"><div class="bar"></div><div class="lbl">Systems &amp; Platforms</div></div>
+      <div class="sys-chips">
+        <span class="sys-chip hi">Google BigQuery</span>
+        <span class="sys-chip hi">LINE Messaging API</span>
+        <span class="sys-chip hi">Python</span>
+        <span class="sys-chip hi">Node.js</span>
+        <span class="sys-chip">Shopee Seller Platform</span>
+        <span class="sys-chip">Lazada Seller Platform</span>
+        <span class="sys-chip">TikTok Shop</span>
+        <span class="sys-chip">WMS (Business User)</span>
+        <span class="sys-chip">OMS (Power User · UAT Contributor)</span>
+        <span class="sys-chip">Google Sheets</span>
+        <span class="sys-chip">Google Apps Script</span>
+        <span class="sys-chip">Internal Tools Development</span>
+      </div>
+    </section>
+
+    <div class="bottom-grid">
+
+      <!-- EDUCATION -->
+      <section class="bottom-sec">
+        <div class="sec-h"><div class="bar"></div><div class="lbl">Education</div></div>
+        <div class="bottom-row">
+          <span class="k">Degree</span>
+          <span class="v"><strong>Bachelor of Engineering</strong></span>
+        </div>
+        <div class="bottom-row">
+          <span class="k">Field</span>
+          <span class="v">Management Engineering &amp; Logistics</span>
+        </div>
+        <div class="bottom-row">
+          <span class="k">Institution</span>
+          <span class="v">Silpakorn University, Thailand</span>
+        </div>
+      </section>
+
+      <!-- ADDITIONAL INFO -->
+      <section class="bottom-sec">
+        <div class="sec-h"><div class="bar"></div><div class="lbl">Additional Information</div></div>
+        <div class="bottom-row">
+          <span class="k">Languages</span>
+          <span class="v">Thai (Native) · English (Professional)</span>
+        </div>
+        <div class="bottom-row">
+          <span class="k">Authorization</span>
+          <span class="v">Thai National</span>
+        </div>
+        <div class="bottom-row">
+          <span class="k">Certifications</span>
+          <span class="v" style="color:#888;">— Add if applicable —</span>
+        </div>
+        <div class="bottom-row">
+          <span class="k">Availability</span>
+          <span class="v" style="color:#888;">— Notice period —</span>
+        </div>
+      </section>
+
+    </div>
+
+  </div><!-- /pg2-body -->
+
+  <div class="pg-watermark">Nonpawit Saisuwan · Resume 2026</div>
+  <div class="pg-num">Page 2 of 2</div>
+</div>
+
+<!-- ========================================================
+     REVIEW SECTION (screen only — does not print)
+     ======================================================== -->
+<div class="review-wrap no-print">
+
+  <div class="rv-title">Resume Review — Senior Recruiter &amp; Hiring Manager Analysis</div>
+
+  <div class="rv-two-col">
+
+    <div>
+      <div class="rv-h">🔍 Senior Recruiter Critique</div>
+      <div class="rv-body">
+        <p><strong>Strengths:</strong></p>
+        <ul>
+          <li>Strong narrative arc: 9 years logistics → e-commerce data/automation. Easy to follow.</li>
+          <li>Production-deployed internal tools (cmg-stock-control) stand out — rare for DA candidates.</li>
+          <li>BigQuery + Python combo is exactly what modern analytics teams want.</li>
+          <li>LINE bot (Dobybot) is a memorable, creative differentiator.</li>
+        </ul>
+        <p><strong>Concerns:</strong></p>
+        <ul>
+          <li>"Department Manager" title may confuse — needs clear repositioning as analytics/data candidate.</li>
+          <li>No formal certifications listed (Google DA, AWS, dbt) — adds risk vs. certified candidates.</li>
+          <li>No quantified metrics — "tens of thousands of orders" is vague. Add specific numbers if possible.</li>
+          <li>Power BI / Tableau not mentioned — standard DA stack items recruiters scan for.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="rv-h">🏢 Hiring Manager Critique</div>
+      <div class="rv-body">
+        <p><strong>Strengths:</strong></p>
+        <ul>
+          <li>Real production deployment experience signals engineering maturity, not just "made dashboards."</li>
+          <li>Domain depth in e-commerce + warehouse is directly applicable at ThaiMart, Lazada, Shopee.</li>
+          <li>Self-initiated projects beyond scope show initiative — valued in senior IC roles.</li>
+          <li>OMS/WMS business user experience is genuinely useful; positioned accurately (not overclaimed).</li>
+        </ul>
+        <p><strong>Concerns:</strong></p>
+        <ul>
+          <li>Node.js on a DA resume is unusual — may cause misclassification as developer.</li>
+          <li>No mention of A/B testing, experimentation, or product analytics — common in marketplace roles.</li>
+          <li>SC Group (9 years) has very thin description — may signal stagnation to some HMs.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCORES -->
+  <div>
+    <div class="rv-h">📊 Scores</div>
+    <div class="rv-two-col">
+      <div>
+        <div class="rv-body" style="margin-bottom:2mm;"><strong>ATS Score</strong> — keyword density &amp; structure</div>
+        <div class="score-row">
+          <div class="score-num">74</div>
+          <div style="flex:1;">
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:74%;"></div></div>
+            <div class="rv-body" style="margin-top:1.5mm; font-size:8pt;">Present: BigQuery, Python, KPI, Dashboard, Automation, SLA, E-Commerce, Warehouse<br/>Missing: Power BI, Tableau, SQL (explicit), ETL, A/B Testing, Data Modeling</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="rv-body" style="margin-bottom:2mm;"><strong>Recruiter Score</strong> — narrative clarity &amp; impact</div>
+        <div class="score-row">
+          <div class="score-num">79</div>
+          <div style="flex:1;">
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:79%;"></div></div>
+            <div class="rv-body" style="margin-top:1.5mm; font-size:8pt;">Clear positioning, strong project section, differentiated profile. Loses points on missing metrics and certifications.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISSING KEYWORDS -->
+  <div>
+    <div class="rv-h">🔑 Missing Keywords to Add</div>
+    <div class="tag-cloud">
+      <span class="tag missing">Power BI</span>
+      <span class="tag missing">Tableau</span>
+      <span class="tag missing">SQL</span>
+      <span class="tag missing">ETL</span>
+      <span class="tag missing">Data Modeling</span>
+      <span class="tag missing">A/B Testing</span>
+      <span class="tag missing">Business Intelligence</span>
+      <span class="tag missing">Root Cause Analysis</span>
+      <span class="tag missing">Data Validation</span>
+      <span class="tag missing">Stakeholder Management</span>
+      <span class="tag">Google Data Analytics</span>
+      <span class="tag">Looker Studio</span>
+      <span class="tag">dbt</span>
+      <span class="tag">Airflow</span>
+      <span class="tag">Google Cloud Platform</span>
+    </div>
+  </div>
+
+  <!-- SALARY + JOB TITLES -->
+  <div>
+    <div class="rv-h">💰 Expected Salary Range — Thai Market 2026</div>
+    <div class="rv-two-col">
+      <div class="salary-box">
+        <div class="salary-role">Senior Data Analyst</div>
+        <div class="salary-range">฿60,000 – ฿90,000 / mo</div>
+        <div class="salary-note">E-Commerce / Marketplace · Mid-Large company</div>
+      </div>
+      <div class="salary-box">
+        <div class="salary-role">Senior BI / Analytics Specialist</div>
+        <div class="salary-range">฿65,000 – ฿95,000 / mo</div>
+        <div class="salary-note">Data-forward orgs · ThaiMart / Lazada / Shopee</div>
+      </div>
+      <div class="salary-box">
+        <div class="salary-role">Operations Analytics Specialist</div>
+        <div class="salary-range">฿55,000 – ฿80,000 / mo</div>
+        <div class="salary-note">SCM / Logistics / Fulfillment orgs</div>
+      </div>
+      <div class="salary-box">
+        <div class="salary-role">Data &amp; Automation Analyst</div>
+        <div class="salary-range">฿58,000 – ฿85,000 / mo</div>
+        <div class="salary-note">Digital Transformation teams</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDED TITLES -->
+  <div>
+    <div class="rv-h">🎯 Best-Fit Job Titles to Target</div>
+    <div class="tag-cloud">
+      <span class="tag" style="border-color:#C8102E88; color:#E8A0A8; font-weight:600;">Senior Data Analyst — E-Commerce Operations ⭐</span>
+      <span class="tag" style="border-color:#C8102E88; color:#E8A0A8; font-weight:600;">Operations Analytics Specialist ⭐</span>
+      <span class="tag">Senior Business Intelligence Analyst</span>
+      <span class="tag">Supply Chain Data Analyst</span>
+      <span class="tag">Data &amp; Automation Analyst</span>
+      <span class="tag">Analytics Engineer</span>
+      <span class="tag">Fulfillment Analytics Analyst</span>
+      <span class="tag">Business Intelligence Analyst — Marketplace</span>
+    </div>
+  </div>
+
+  <!-- IMPROVEMENTS -->
+  <div>
+    <div class="rv-h">✏️ Suggested Improvements</div>
+    <div class="rv-body">
+      <ul>
+        <li><strong>Add quantified metrics</strong> — e.g. "Processed X,000 orders daily", "Reduced reporting time by X hours/week", "Reduced stock variance by X%"</li>
+        <li><strong>Add Power BI or Tableau</strong> if you have any exposure — even basic use qualifies as a keyword</li>
+        <li><strong>Explicitly mention SQL</strong> — it's implied by BigQuery but recruiters scan for the keyword</li>
+        <li><strong>Expand SC Group section</strong> — add 2–3 specific analytical contributions (what data, what impact, what tools)</li>
+        <li><strong>Soften "Node.js"</strong> to "server-side scripting" or focus it on the Dobybot project context</li>
+        <li><strong>Get 1 certification</strong> — Google Data Analytics (Coursera, ~2 months) or Google Cloud Fundamentals would materially raise ATS score</li>
+        <li><strong>Add a LinkedIn / GitHub profile</strong> if you have one — ThaiMart and marketplace companies check both</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /review-wrap -->
+
+</body>
+</html>

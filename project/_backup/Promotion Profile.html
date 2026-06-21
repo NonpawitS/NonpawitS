@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Promotion Profile — Nonpawit Saisuwan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     PRINT SETUP — A4 portrait, 15mm margins
+     ============================================================ */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #BFBFBF;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-feature-settings: "kern", "liga", "ss01";
+    -webkit-font-smoothing: antialiased;
+    color: #1A1A1A;
+  }
+
+  /* Screen presentation: center the page on a soft gray backdrop */
+  body {
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
+    min-height: 100vh;
+  }
+
+  /* ============================================================
+     PAGE — A4 (210mm × 297mm)
+     ============================================================ */
+  .page {
+    width: 210mm;
+    height: 297mm;
+    background: #FFFFFF;
+    box-shadow: 0 6px 40px rgba(0,0,0,0.18);
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 73.5mm 1fr; /* 35% / 65% of 210mm */
+  }
+
+  @media print {
+    body { background: #FFFFFF; padding: 0; display: block; }
+    .page { box-shadow: none; margin: 0; }
+  }
+
+  /* ============================================================
+     TYPE TOKENS
+     ============================================================ */
+  :root {
+    --maroon: #C8102E;
+    --maroon-deep: #9A0C23;
+    --ink: #1A1A1A;
+    --sub: #595959;
+    --rule: #D9D9D9;
+    --sidebar-bg: #F5F2F2;
+
+    --eyebrow: 8pt;
+    --body: 8.5pt;
+    --section: 10.5pt;
+    --name: 18pt;
+    --subtitle: 11pt;
+    --title: 22pt;
+  }
+
+  /* ============================================================
+     LEFT SIDEBAR
+     ============================================================ */
+  .sidebar {
+    background: var(--sidebar-bg);
+    padding: 12mm 8mm 12mm 15mm;
+    display: flex;
+    flex-direction: column;
+    gap: 5mm;
+    color: var(--ink);
+  }
+
+  .photo {
+    width: 100px;
+    height: 100px;
+    border: 1px solid var(--maroon);
+    background: #ECECEC;
+    align-self: flex-start;
+    overflow: hidden;
+    position: relative;
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+  }
+
+  .ident .name {
+    font-size: var(--name);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.2px;
+    color: var(--ink);
+  }
+  .ident .role {
+    margin-top: 2.5mm;
+    font-size: 9pt;
+    line-height: 1.45;
+    color: var(--sub);
+  }
+  .ident .role strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .side-section {
+    padding-top: 4mm;
+    border-top: 1px solid var(--rule);
+  }
+  .side-section:first-of-type { /* no top rule above first section after ident */ }
+
+  .side-h {
+    font-size: var(--eyebrow);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--maroon);
+    text-transform: uppercase;
+    margin-bottom: 3mm;
+  }
+
+  .side-body {
+    font-size: var(--body);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .side-body .muted { color: var(--sub); }
+  .side-body p + p { margin-top: 2.2mm; }
+
+  .contact-line { display: block; }
+  .contact-line + .contact-line { margin-top: 0.8mm; }
+
+  .exp-block + .exp-block { margin-top: 3mm; }
+  .exp-block .org { font-weight: 600; color: var(--ink); }
+  .exp-block .pos { color: var(--ink); }
+  .exp-block .yrs { color: var(--sub); font-size: 8.5pt; }
+
+  .comp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1.2mm 0;
+    font-size: var(--body);
+    line-height: 1.35;
+  }
+  .comp-row + .comp-row { border-top: 1px dotted #E5E5E5; }
+  .comp-row .lab { color: var(--ink); padding-right: 4mm; }
+  .comp-row .val { color: var(--sub); font-size: 8pt; letter-spacing: 0.3px; white-space: nowrap; }
+  .comp-row .val.high {
+    color: var(--maroon);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .comp-row .val .star { margin-right: 2px; }
+
+  .skills {
+    font-size: var(--body);
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .skills .dot {
+    color: var(--maroon);
+    margin: 0 4px;
+  }
+
+  /* ============================================================
+     RIGHT MAIN COLUMN
+     ============================================================ */
+  .main {
+    padding: 12mm 15mm 12mm 10mm;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4mm;
+    min-width: 0;
+  }
+
+  .eyebrow {
+    font-size: var(--eyebrow);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--maroon);
+    text-transform: uppercase;
+  }
+
+  .title {
+    font-size: var(--title);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -0.4px;
+    margin-top: 2mm;
+  }
+  .title .arrow {
+    color: var(--maroon);
+    font-weight: 700;
+    margin: 0 4px;
+  }
+
+  .subtitle {
+    font-size: var(--subtitle);
+    color: var(--maroon);
+    margin-top: 1.5mm;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+  }
+
+  .header-rule {
+    margin-top: 3mm;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* Section in main column */
+  .sec-h {
+    font-size: var(--section);
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--maroon);
+    text-transform: uppercase;
+    padding-bottom: 1mm;
+    border-bottom: 1pt solid var(--maroon);
+    margin-bottom: 2mm;
+  }
+
+  .sec {
+    /* tight density */
+  }
+  .sec + .sec { margin-top: 0; } /* gap is on parent */
+
+  .sec-body {
+    font-size: var(--body);
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .sec-body p + p { margin-top: 1.4mm; }
+
+  ul.bullets {
+    list-style: none;
+    font-size: var(--body);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  ul.bullets li {
+    position: relative;
+    padding-left: 4.5mm;
+  }
+  ul.bullets li + li { margin-top: 1mm; }
+  ul.bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 5px;
+    height: 5px;
+    background: var(--maroon);
+  }
+
+  /* Performance trajectory rows */
+  .traj {
+    display: grid;
+    grid-template-columns: 16mm 22mm 1fr;
+    column-gap: 4mm;
+    row-gap: 1.5mm;
+    font-size: var(--body);
+    line-height: 1.45;
+  }
+  .traj .yr { color: var(--maroon); font-weight: 600; }
+  .traj .rt { color: var(--ink); font-weight: 600; }
+  .traj .desc { color: var(--sub); }
+
+  /* Two-column dev plan grid */
+  .twocol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 6mm;
+    row-gap: 1mm;
+  }
+
+  /* Footer-ish closing line */
+  .closing {
+    margin-top: auto;
+    padding-top: 4mm;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 7.5pt;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--sub);
+  }
+  .closing .right { color: var(--maroon); font-weight: 600; }
+
+  /* Sidebar closing */
+  .side-foot {
+    margin-top: auto;
+    padding-top: 4mm;
+    font-size: 7pt;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--sub);
+  }
+</style>
+</head>
+<body>
+
+  <article class="page" data-screen-label="01 Promotion Profile">
+
+    <!-- =================== LEFT SIDEBAR =================== -->
+    <aside class="sidebar">
+
+      <div class="photo"><img src="headshot.jpg" alt="Nonpawit Saisuwan" /></div>
+
+      <div class="ident">
+        <div class="name">Nonpawit<br/>Saisuwan</div>
+        <div class="role">
+          <strong>Department Manager</strong>
+          CMG Online — Order Management
+        </div>
+      </div>
+
+      <section class="side-section">
+        <div class="side-h">Contact</div>
+        <div class="side-body">
+          <span class="contact-line">Bangna DC, KM.21</span>
+          <span class="contact-line">Thailand</span>
+          <span class="contact-line">sanonpawit@central.co.th</span>
+          <span class="contact-line muted">Employee ID&nbsp;·&nbsp;20241332</span>
+        </div>
+      </section>
+
+      <section class="side-section">
+        <div class="side-h">Education</div>
+        <div class="side-body">
+          <p>
+            <strong>B.Eng., Silpakorn University</strong><br/>
+            <span class="muted">Management Engineering &amp; Logistics</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="side-section">
+        <div class="side-h">Experience</div>
+        <div class="side-body">
+          <div class="exp-block">
+            <div class="org">CMG Online</div>
+            <div class="pos">Department Manager</div>
+            <div class="yrs">Nov 2022 — Present</div>
+          </div>
+          <div class="exp-block">
+            <div class="org">SC Group</div>
+            <div class="pos">Analyst, Transportation</div>
+            <div class="yrs">2014 — 2022 · 9 yrs</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="side-section">
+        <div class="side-h">Competencies</div>
+        <div class="side-body">
+          <div class="comp-row">
+            <span class="lab">Leading Innovation</span>
+            <span class="val high"><span class="star">★</span>High</span>
+          </div>
+          <div class="comp-row">
+            <span class="lab">Profitable Growth</span>
+            <span class="val">Medium</span>
+          </div>
+          <div class="comp-row">
+            <span class="lab">Customer Satisfaction</span>
+            <span class="val">Medium</span>
+          </div>
+          <div class="comp-row">
+            <span class="lab">Org Excellence</span>
+            <span class="val">Medium</span>
+          </div>
+          <div class="comp-row">
+            <span class="lab">Sustainable Collab.</span>
+            <span class="val">Medium</span>
+          </div>
+          <div class="comp-row">
+            <span class="lab">Developing People</span>
+            <span class="val">Medium</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="side-section">
+        <div class="side-h">Technical Skills</div>
+        <div class="side-body skills">Python·Node.js·BigQuery·
+Automation·AI Tools·Vibe Coding·Data Pipelines</div>
+      </section>
+
+      <div class="side-foot">Promotion Profile · 2026</div>
+
+    </aside>
+
+    <!-- =================== RIGHT MAIN =================== -->
+    <main class="main">
+
+      <header>
+        <div class="eyebrow">Promotion Profile</div>
+        <h1 class="title">
+          Career Path Advancement
+        </h1>
+        <div class="subtitle">Data Intelligence &amp; Optimization</div>
+        <div class="header-rule"></div>
+      </header>
+
+      <section class="sec">
+        <h2 class="sec-h">Executive Summary</h2>
+        <div class="sec-body">
+          <p>Department Manager at CMG Online with proven operational delivery at scale, consistently expanding scope into data intelligence, automation, and analytics engineering. Combines an engineering foundation with hands-on initiative beyond formal mandate — positioned to lead division-wide Data Intelligence &amp; Optimization transformation.</p>
+        </div>
+      </section>
+
+      <section class="sec">
+        <h2 class="sec-h">What Has Been Built and Led</h2>
+        <div class="sec-body">
+          <p><strong style="color:var(--maroon); letter-spacing:0.5px;">Automation.</strong> Led the implementation of the <strong>Autorunwave</strong> system — an automated wave processing engine that replaced manual wave creation and scaled platform-specific order handling. Established automated campaign reporting workflows with scheduled exception alerting integrated into LINE for the operations team.</p>
+
+          <p><strong style="color:var(--maroon); letter-spacing:0.5px;">Conversational Operations.</strong> Led <strong>Project Dobybot</strong> — a LINE-based operations assistant that lets the team query orders, stock, and campaign status through natural conversation, reducing dependency on dashboards and manual lookups during high-volume periods.</p>
+
+          <p><strong style="color:var(--maroon); letter-spacing:0.5px;">Data Infrastructure.</strong> Built and integrated operational data pipelines into <strong>Google BigQuery</strong>, creating scalable reporting infrastructure for the department. Developed Python and Node.js automation scripts that replaced repetitive manual reporting work and improved data accessibility for cross-functional decisions.</p>
+
+          <p><strong style="color:var(--maroon); letter-spacing:0.5px;">Internal Tools.</strong> Personally developed <strong>cmg-stock-control</strong> — an internal stock management tool deployed on production infrastructure — addressing a real operational need that previously relied on manual coordination. Designed Stock Dashboard and Q2 Consumable Forecast systems supporting both warehouse readiness and brand-level monitoring.</p>
+
+          <p><strong style="color:var(--maroon); letter-spacing:0.5px;">Operational Excellence &amp; SLA Monitoring.</strong> Built operational tracking and reporting solutions for campaign visibility, including hourly tracking reports and automated dashboards. Enhanced KPI/SLA monitoring frameworks to support proactive issue identification, faster escalation, and operational stability during high-volume periods.</p>
+        </div>
+      </section>
+
+      <section class="sec">
+        <h2 class="sec-h">Performance Trajectory</h2>
+        <div class="traj">
+          <span class="yr">2024</span>
+          <span class="rt">Rating A−</span>
+          <span class="desc">Exceeding Expectation across operational delivery and campaign execution.</span>
+
+          <span class="yr">2025</span>
+          <span class="rt">Rating B</span>
+          <span class="desc">Meeting Expectation while expanding scope into data intelligence and optimization initiatives.</span>
+        </div>
+      </section>
+
+      <section class="sec">
+        <h2 class="sec-h">Development Plan — 12 Months</h2>
+        <ul class="bullets twocol">
+          <li>People Leadership Expansion</li>
+          <li>Strategic Influence at Division Level</li>
+          <li>Talent Development for Data-Enabled Ops</li>
+          <li>Executive Communication &amp; Business Framing</li>
+        </ul>
+      </section>
+
+      <section class="sec">
+        <h2 class="sec-h">Career Vision</h2>
+        <div class="sec-body">
+          <p>Lead the division's Data Intelligence &amp; Optimization agenda — scalable data architecture, predictive operational monitoring, optimization modeling, and data-driven decision support across CMG Online.</p>
+        </div>
+      </section>
+
+      <div class="closing">
+        <span>Prepared for Promotion Committee Review</span>
+        <span class="right">Confidential</span>
+      </div>
+
+    </main>
+
+  </article>
+
+</body>
+</html>
